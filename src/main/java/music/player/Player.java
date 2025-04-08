@@ -24,7 +24,6 @@ public class Player {
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
 
-            clip.start();
 
             String response = "";
 
@@ -35,11 +34,18 @@ public class Player {
                         S -> Stop
                         R -> Reset
                         Q -> Quit
-                        >>>""" 
+                        >>> """ 
                         );
 
-                response = scanner.nextLine().toUpperCase();
+                response = scanner.next().toUpperCase();
 
+                switch ( response ) {
+                    case "P" -> clip.start();
+                    case "S" -> clip.stop();
+                    case "R" -> clip.setMicrosecondPosition(0);
+                    case "Q" -> clip.close();
+                    // default  -> System.out.println("\nInvalid Command, Try:");
+                }
             }
 
         } catch ( LineUnavailableException e ) {
